@@ -34,6 +34,7 @@ def elegir_numero_a_adivinar():
 
     while True:         #En este while se da el juego: poner números hasta adivinarlo.
         numero = input(f"Introduzca un número entre el {minimo} y el {maximo}. Si quieres una ayudita, escriba 'ayuda': ")
+        print ("")
 
         if intentos == intentoslim:         #Aquí defino que si llegas al número máximo de intentos de ese nivel pierdes.
             print(f"No has adivinado el número en {intentoslim} intentos. Has perdido.")
@@ -54,17 +55,17 @@ def elegir_numero_a_adivinar():
 
         else:                   #Si no se pide la ayuda compara el numero para saber si ha ganado o no.
             if numero.isdigit():        #Aquí se comprueba si has introducido un número entre el mínimo y el másimo de ese nivel.
-                intentos = intentos + 1
-
                 try:
                     numero = int(numero) 
 
                 except ValueError:
                     print ("La entrada es incorrecta.")
 
-                while not minimo <= numero < maximo:
+                while not minimo <= numero <= maximo:
                     print(f"No ha introducido un numero entre {minimo} y {maximo}. \n")
                     break
+
+                intentos = intentos + 1
                 
                 #Una vez se comprueba que has introducido un númer correcto, se decide si has ganado o no:
                 if numerosecreto == numero:         #Aquí se comprueba si has ganado.  
@@ -90,7 +91,14 @@ def elegir_numero_a_adivinar():
                         print("¡Hasta pronto!")                         #Si decides no volver a jugar se cierra el programa.
                         sys.exit() 
 
-
+                else:
+                    if numero > numerosecreto:
+                        print(f"Tu numero es mayor que el numero a adivinar. ")
+                        ayuda2 = numero
+                    
+                    else:
+                        print(f"Tu numero es menor que el numero a adivinar. ")
+                        ayuda = numero
 
             else:
                 print("No has conseguido ni introducir un número... prueba otra vez. \n")
